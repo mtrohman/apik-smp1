@@ -1,0 +1,80 @@
+@extends('{{adminRoutePrefix}}layouts.backend')
+@section('title')
+    {{ $title='{{modelTitlePlural}}' }}
+@endsection
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="block block-themed">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        {{ $title }}
+                    </h3>
+                </div>
+
+                <div class="block-content">
+                    @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+                    @endif
+
+                    <a class="btn btn-primary btn-sm mb-2" href='{{ route("{{adminRoutePrefix}}{{modelKebabPlural}}.create") }}'><i class="fa fa-plus"></i> Create {{modelTitle}}</a>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Created
+                                </th>
+                                <th width="20%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse(${{modelCamelPlural}} as ${{modelCamel}})
+                            <tr>
+                                <td>
+                                    {{ ${{modelCamel}}->title ?? 'N/A' }}
+                                </td>
+
+                                <td>
+                                    {{ optional(${{modelCamel}}->created_at)->diffForHumans() }}
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("{{adminRoutePrefix}}{{modelKebabPlural}}.edit", ${{modelCamel}}->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
+
+                                    <form method="POST" action='{{ route("{{adminRoutePrefix}}{{modelKebabPlural}}.destroy", ${{modelCamel}}->id) }}'>
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+
+                                        <button type="submit" class="btn btn-sm btn-danger me-1 mb-1 w-100">
+                                            <i class="fa fa-times opacity-50 me-1"></i> Delete
+                                        </button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" align="center">No records found!</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination  -->
+                    <div class="d-flex justify-content-center">
+                        {{ ${{modelCamelPlural}}->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
