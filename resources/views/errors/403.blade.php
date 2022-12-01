@@ -5,7 +5,7 @@
 @section('message', __($exception->getMessage() ?: 'Forbidden')) --}}
 
 @extends('layouts.simple')
-@section('title', 'Not Found')
+@section('title', 'Forbidden')
 
 @section('content')
 

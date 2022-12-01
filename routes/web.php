@@ -71,3 +71,19 @@ Route::group([ 'namespace'=> '\App\Http\Controllers\Admin', 'prefix' => 'admin',
 Route::group([ 'namespace'=> '\App\Http\Controllers\Admin', 'prefix' => 'admin',  'as'=>'admin.', 'middleware' => 'auth' ], function () { 
   Route::resource('rka-pengeluarans', 'RkaPengeluaranController'); 
 });
+
+Route::group([ 'namespace'=> '\App\Http\Controllers\Admin', 'prefix' => 'admin',  'as'=>'admin.', 'middleware' => 'auth' ], function () { 
+  Route::get('/saldo-berjalan', 'SaldoController@index')->name('saldo');
+  Route::get('/saldo-awal', 'SaldoController@saldo_awal')->name('saldo_awal');
+
+  Route::get('/laporan/rkas-bab3', 'LaporanController@rkas_bab3')->name('laporan.rkas_bab3');
+  Route::get('/laporan/rkas-bab4', 'LaporanController@rkas_bab4')->name('laporan.rkas_bab4');
+  Route::get('/laporan/rkas-bab5', 'LaporanController@rkas_bab5')->name('laporan.rkas_bab5');
+  Route::get('/laporan/rkas-bab6', 'LaporanController@rkas_bab6')->name('laporan.rkas_bab6');
+
+  Route::get('/laporan/realisasi-bab3', 'LaporanController@realisasi_bab3')->name('laporan.realisasi_bab3');
+  Route::get('/laporan/realisasi-bab4', 'LaporanController@realisasi_bab4')->name('laporan.realisasi_bab4');
+  Route::get('/laporan/realisasi-bab5', 'LaporanController@realisasi_bab5')->name('laporan.realisasi_bab5');
+  Route::get('/laporan/realisasi-bab6', 'LaporanController@realisasi_bab6')->name('laporan.realisasi_bab6');
+   
+});

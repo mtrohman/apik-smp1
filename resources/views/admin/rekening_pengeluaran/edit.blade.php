@@ -31,7 +31,7 @@
                                     <select class="form-select @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id" style="width: 100%;">
                                         <option value>Pilih Parent Rekening</option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
                                         @foreach ($parent as $item)
-                                            <option value="{{$item->id}}" @if($rekeningPengeluaran->parent_id == $item->id) selected @endif>{{ $item->nama_parent }}</option>
+                                            <option value="{{$item->id}}" @if($rekeningPengeluaran->parent_id == $item->id) selected @endif>{{ $item->kode_parent }} - {{ $item->nama_parent }}</option>
                                         @endforeach
                                     </select>
                                     <label class="form-label" for="example-select2">Parent</label>

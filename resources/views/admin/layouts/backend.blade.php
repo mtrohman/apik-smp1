@@ -260,25 +260,25 @@
                     </a>
                     <ul class="nav-main-submenu">
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab3">
+                        <a class="nav-main-link" href="laporan/rkas-bab3">
                           <span class="nav-main-link-name">BAB 3</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab4">
+                        <a class="nav-main-link" href="laporan/rkas-bab4">
                           <span class="nav-main-link-name">BAB 4</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab5">
+                        <a class="nav-main-link" href="laporan/rkas-bab5">
                           <span class="nav-main-link-name">BAB 5</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab6">
+                        <a class="nav-main-link" href="laporan/rkas-bab6">
                           <span class="nav-main-link-name">BAB 6</span>
                         </a>
                       </li>
@@ -292,25 +292,25 @@
                     </a>
                     <ul class="nav-main-submenu">
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab3">
+                        <a class="nav-main-link" href="laporan/realisasi-bab3">
                           <span class="nav-main-link-name">BAB 3</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab4">
+                        <a class="nav-main-link" href="laporan/realisasi-bab4">
                           <span class="nav-main-link-name">BAB 4</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab5">
+                        <a class="nav-main-link" href="laporan/realisasi-bab5">
                           <span class="nav-main-link-name">BAB 5</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/bab6">
+                        <a class="nav-main-link" href="laporan/realisasi-bab6">
                           <span class="nav-main-link-name">BAB 6</span>
                         </a>
                       </li>
@@ -410,8 +410,7 @@
         <!-- Right Section -->
         <div class="space-x-1">
           <button type="button" class="btn btn-sm btn-alt-secondary" id="TA">
-              <i class="fa fa-user d-sm-none"></i>
-              <span class="d-none d-sm-inline-block fw-semibold">TA : {{ Cookie::get('ta') }}</span>
+              <span class="fw-semibold">TA : {{ Cookie::get('ta') }}</span>
           </button>
           <!-- User Dropdown -->
           <div class="dropdown d-inline-block">

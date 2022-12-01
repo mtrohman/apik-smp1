@@ -27,57 +27,59 @@
                     @endif
 
                     <a class="btn btn-primary btn-sm mb-2" href='{{ route("admin.rekening-pendapatans.create") }}'><i class="fa fa-plus"></i> Tambah</a>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th width="10%">
+                                        Parent
+                                    </th>
+                                    <th width="10%">
+                                        Kode
+                                    </th>
+                                    <th>
+                                        Nama Rekening
+                                    </th>
+                                    
+                                    <th width="15%">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($rekeningPendapatans as $rekeningPendapatan)
+                                <tr>
+                                    <td>
+                                        {{ $rekeningPendapatan->parentPendapatan->nama_parent ?? 'N/A' }}
+                                    </td>
+                                    <td>
+                                        {{ $rekeningPendapatan->kode_rekening ?? 'N/A' }}
+                                    </td>
+                                    <td>
+                                        {{ $rekeningPendapatan->nama_rekening ?? 'N/A' }}
+                                    </td>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th width="10%">
-                                    Parent
-                                </th>
-                                <th width="10%">
-                                    Kode
-                                </th>
-                                <th>
-                                    Nama Rekening
-                                </th>
-                                
-                                <th width="15%">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($rekeningPendapatans as $rekeningPendapatan)
-                            <tr>
-                                <td>
-                                    {{ $rekeningPendapatan->parentPendapatan->nama_parent ?? 'N/A' }}
-                                </td>
-                                <td>
-                                    {{ $rekeningPendapatan->kode_rekening ?? 'N/A' }}
-                                </td>
-                                <td>
-                                    {{ $rekeningPendapatan->nama_rekening ?? 'N/A' }}
-                                </td>
+                                    <td style="white-space: nowrap">
+                                        <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.rekening-pendapatans.edit", $rekeningPendapatan->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
 
-                                <td>
-                                    <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.rekening-pendapatans.edit", $rekeningPendapatan->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
+                                        <form method="POST" action='{{ route("admin.rekening-pendapatans.destroy", $rekeningPendapatan->id) }}'>
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
 
-                                    <form method="POST" action='{{ route("admin.rekening-pendapatans.destroy", $rekeningPendapatan->id) }}'>
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
+                                            <button type="submit" class="btn btn-sm btn-danger me-1 mb-1 w-100">
+                                                <i class="fa fa-times opacity-50 me-1"></i> Delete
+                                            </button>
+                                        </form>
 
-                                        <button type="submit" class="btn btn-sm btn-danger me-1 mb-1 w-100">
-                                            <i class="fa fa-times opacity-50 me-1"></i> Delete
-                                        </button>
-                                    </form>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="5" align="center">No records found!</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
 
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" align="center">No records found!</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                    </div>
 
                     <!-- Pagination  -->
                     <div class="d-flex justify-content-center">

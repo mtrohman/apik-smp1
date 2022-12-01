@@ -77,7 +77,6 @@
                                 <tr>
                                     <td>
                                         <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.rka-pengeluarans.edit", $rkaPengeluaran->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
-
                                         <form method="POST" action='{{ route("admin.rka-pengeluarans.destroy", $rkaPengeluaran->id) }}'>
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
@@ -86,7 +85,6 @@
                                                 <i class="fa fa-times opacity-50 me-1"></i> Delete
                                             </button>
                                         </form>
-
                                     </td>
 
                                     <td>

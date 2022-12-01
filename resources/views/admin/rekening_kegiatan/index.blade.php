@@ -77,7 +77,7 @@
                                         {{ optional($rekeningKegiatan->created_at)->diffForHumans() }}
                                     </td> --}}
 
-                                    <td>
+                                    <td style="white-space: nowrap">
                                         <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.rekening-kegiatans.edit", $rekeningKegiatan->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
 
                                         <form method="POST" action='{{ route("admin.rekening-kegiatans.destroy", $rekeningKegiatan->id) }}'>

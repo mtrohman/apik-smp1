@@ -15,6 +15,8 @@ class CreateSaldoTable extends Migration
     {
         Schema::create('saldos', function (Blueprint $table) {
             $table->id();
+            $table->year('ta');
+            $table->float('saldo_tunai', 12, 2)->default(0);
             $table->timestamps();
         });
     }
