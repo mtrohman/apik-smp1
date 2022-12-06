@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RkaPengeluaranRequest;
+use App\Http\Resources\RkaPengeluaranResource;
 use App\Models\RekeningKegiatan;
 use App\Models\RekeningPengeluaran;
 use App\Models\RkaPengeluaran;
@@ -147,5 +148,11 @@ class RkaPengeluaranController extends Controller
             );
             return redirect()->route('admin.rka-pengeluarans.index')->with($notification);
         }
+    }
+
+    public function search($rekeningId)
+    {
+        $rkaPengeluarans = RkaPengeluaran::with('rekeningKegiatan')->whereRelation('rekeningKegiatan', 'rekening_id', $rekeningId)->get();
+        return $rkaPengeluarans;//RkaPengeluaranResource::collection($rkaPengeluarans);
     }
 }

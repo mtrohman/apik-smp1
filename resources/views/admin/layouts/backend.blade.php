@@ -234,51 +234,51 @@
               </li>
 
               <li class="nav-main-item">
-                <a class="nav-main-link" href="/admin/penerimaan">
+                <a class="nav-main-link {{ request()->is('admin/penerimaans*') ? ' active' : '' }}" href="/admin/penerimaans">
                   <i class="nav-main-link-icon fa fa-circle-dollar-to-slot"></i>
                   <span class="nav-main-link-name">Penerimaan</span>
                 </a>
               </li>
 
               <li class="nav-main-item">
-                <a class="nav-main-link" href="/admin/belanja">
+                <a class="nav-main-link {{ request()->is('admin/belanjas*') ? ' active' : '' }}" href="/admin/belanjas">
                   <i class="nav-main-link-icon fa fa-shopping-cart"></i>
                   <span class="nav-main-link-name">Belanja</span>
                 </a>
               </li>
 
-              <li class="nav-main-item">
+              <li class="nav-main-item {{ request()->is('admin/laporan/*') ? ' open' : '' }}">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                   <i class="nav-main-link-icon fa fa-file-lines"></i>
                   <span class="nav-main-link-name">Laporan</span>
                 </a>
                 
                 <ul class="nav-main-submenu">
-                  <li class="nav-main-item">
+                  <li class="nav-main-item {{ request()->is('admin/laporan/rkas-*') ? ' open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                       <span class="nav-main-link-name">RKAS</span>
                     </a>
                     <ul class="nav-main-submenu">
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/rkas-bab3">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/rkas-bab3') ? ' active' : '' }}" href="/admin/laporan/rkas-bab3">
                           <span class="nav-main-link-name">BAB 3</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/rkas-bab4">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/rkas-bab4') ? ' active' : '' }}" href="/admin/laporan/rkas-bab4">
                           <span class="nav-main-link-name">BAB 4</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/rkas-bab5">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/rkas-bab5') ? ' active' : '' }}" href="/admin/laporan/rkas-bab5">
                           <span class="nav-main-link-name">BAB 5</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/rkas-bab6">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/rkas-bab6') ? ' active' : '' }}" href="/admin/laporan/rkas-bab6">
                           <span class="nav-main-link-name">BAB 6</span>
                         </a>
                       </li>
@@ -286,31 +286,31 @@
                     </ul>
                   </li>
 
-                  <li class="nav-main-item">
+                  <li class="nav-main-item {{ request()->is('admin/laporan/realisasi-*') ? ' open' : '' }}">
                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                       <span class="nav-main-link-name">Realisasi</span>
                     </a>
                     <ul class="nav-main-submenu">
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/realisasi-bab3">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/realisasi-bab3') ? ' active' : '' }}" href="/admin/laporan/realisasi-bab3">
                           <span class="nav-main-link-name">BAB 3</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/realisasi-bab4">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/realisasi-bab4') ? ' active' : '' }}" href="/admin/laporan/realisasi-bab4">
                           <span class="nav-main-link-name">BAB 4</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/realisasi-bab5">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/realisasi-bab5') ? ' active' : '' }}" href="/admin/laporan/realisasi-bab5">
                           <span class="nav-main-link-name">BAB 5</span>
                         </a>
                       </li>
 
                       <li class="nav-main-item">
-                        <a class="nav-main-link" href="laporan/realisasi-bab6">
+                        <a class="nav-main-link {{ request()->is('admin/laporan/realisasi-bab6') ? ' active' : '' }}" href="/admin/laporan/realisasi-bab6">
                           <span class="nav-main-link-name">BAB 6</span>
                         </a>
                       </li>

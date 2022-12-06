@@ -23,6 +23,12 @@
                     <h3 class="block-title">
                         {{ $title }}
                     </h3>
+
+                    <div class="block-options">
+                        <a href="/admin/rekening-kegiatans" class="btn btn-sm btn-alt-primary">
+                        <i class="fa fa-fw fa-level-up-alt opacity-50"></i> Kegiatan
+                        </a>
+                    </div>
                 </div>
 
                 <div class="block-content">

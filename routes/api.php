@@ -82,3 +82,13 @@ Route::group([ 'namespace'=> '\App\Http\Controllers\Api\Admin', 'prefix' => 'adm
   Route::get('/rka-pengeluarans/search/{title}', 'RkaPengeluaranController@search')->name('rka-pengeluarans.search'); 
   Route::apiResource('rka-pengeluarans', 'RkaPengeluaranController'); 
 });
+
+Route::group([ 'namespace'=> '\App\Http\Controllers\Api\Admin', 'prefix' => 'admin',  'as'=>'admin.', 'middleware' => ['auth:api']], function () { 
+  Route::get('/penerimaans/search/{title}', 'PenerimaanController@search')->name('penerimaans.search'); 
+  Route::apiResource('penerimaans', 'PenerimaanController'); 
+});
+
+Route::group([ 'namespace'=> '\App\Http\Controllers\Api\Admin', 'prefix' => 'admin',  'as'=>'admin.', 'middleware' => ['auth:api']], function () { 
+  Route::get('/belanjas/search/{title}', 'BelanjaController@search')->name('belanjas.search'); 
+  Route::apiResource('belanjas', 'BelanjaController'); 
+});

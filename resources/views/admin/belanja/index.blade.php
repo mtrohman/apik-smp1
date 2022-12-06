@@ -1,6 +1,6 @@
 @extends('admin.layouts.backend')
 @section('title')
-    {{ $title='Daftar Kegiatan' }}
+    {{ $title='Daftar Belanja' }}
 @endsection
 
 @section('css_before')
@@ -25,8 +25,8 @@
                     </h3>
 
                     <div class="block-options">
-                        <a href="/admin/rekening-pengeluarans" class="btn btn-sm btn-alt-primary">
-                            <i class="fa fa-fw fa-level-up-alt opacity-50"></i> Rekening Pengeluaran
+                        <a href="/admin/rka-pengeluarans" class="btn btn-sm btn-alt-primary">
+                            <i class="fa fa-fw fa-level-up-alt opacity-50"></i> RKA Pengeluaran
                         </a>
                     </div>
                 </div>
@@ -38,68 +38,52 @@
                     </div>
                     @endif
 
-                    <a class="btn btn-primary btn-sm mb-2" href='{{ route("admin.rekening-kegiatans.create") }}'><i class="fa fa-plus"></i> Tambah</a>
+                    <a class="btn btn-primary btn-sm mb-2" href='{{ route("admin.belanjas.create") }}'><i class="fa fa-plus"></i> Tambah</a>
 
                     <div class="table-responsive">
                         <table class="table mono table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="5%">
-                                        TA
-                                    </th>
-
+                                    <th>#</th>
                                     <th width="20%">
-                                        Rekening
+                                        Tanggal
                                     </th>
-
-                                    <th width="10%">
-                                        Kode
-                                    </th>
-
                                     <th>
-                                        Nama Kegiatan
+                                        RKA Pengeluaran
                                     </th>
-
-                                    <th width="15%">
+                                    <th>
+                                        Nominal
+                                    </th>
+                                    <th>
                                         Keterangan
                                     </th>
-                                    {{-- <th>
-                                        Created
-                                    </th> --}}
-                                    <th width="10%">Actions</th>
+                                    <th width="12%">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($rekeningKegiatans as $rekeningKegiatan)
+                                @forelse($belanjas as $belanja)
                                 <tr>
                                     <td>
-                                        {{ $rekeningKegiatan->ta ?? 'N/A' }}
+                                        {{$loop->iteration}}
+                                    </td>
+                                    <td>
+                                        {{ $belanja->tanggal->locale('id')->isoFormat('LL') ?? 'N/A' }}
+                                    </td>
+                                    <td>
+                                        {{ $belanja->rkaPengeluaran->rekeningKegiatan->kode_kegiatan ?? 'N/A' }} - {{ $belanja->rkaPengeluaran->rekeningKegiatan->nama_kegiatan ?? 'N/A' }}
+                                    </td>
+                                    <td class="text-end" style="white-space: nowrap">
+                                        @money($belanja->nominal ?? 0)
                                     </td>
 
                                     <td>
-                                        {{ $rekeningKegiatan->rekeningPengeluaran->nama_rekening ?? 'N/A' }}
+                                        {{ $belanja->keterangan ?? "-" }}
                                     </td>
-
-                                    <td>
-                                        {{ $rekeningKegiatan->kode_kegiatan ?? 'N/A' }}
-                                    </td>
-
-                                    <td>
-                                        {{ $rekeningKegiatan->nama_kegiatan ?? 'N/A' }}
-                                    </td>
-
-                                    <td>
-                                        {{ $rekeningKegiatan->ket_kegiatan ?? '-' }}
-                                    </td>
-
-                                    {{-- <td>
-                                        {{ optional($rekeningKegiatan->created_at)->diffForHumans() }}
-                                    </td> --}}
 
                                     <td style="white-space: nowrap">
-                                        <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.rekening-kegiatans.edit", $rekeningKegiatan->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
+                                        <a class="btn btn-sm btn-success me-1 w-100 mb-1" href='{{ route("admin.belanjas.edit", $belanja->id) }}'><i class="fa fa-pencil opacity-50 me-1"></i> Edit</a>
 
-                                        <form method="POST" action='{{ route("admin.rekening-kegiatans.destroy", $rekeningKegiatan->id) }}'>
+                                        <form method="POST" action='{{ route("admin.belanjas.destroy", $belanja->id) }}'>
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
@@ -112,16 +96,17 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" align="center">No records found!</td>
+                                    <td colspan="6" align="center">No records found!</td>
                                 </tr>
                                 @endforelse
                             </tbody>
                         </table>
+
                     </div>
 
                     <!-- Pagination  -->
                     <div class="d-flex justify-content-center">
-                        {{ $rekeningKegiatans->links() }}
+                        {{ $belanjas->links() }}
                     </div>
                 </div>
             </div>

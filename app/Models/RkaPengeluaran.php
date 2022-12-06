@@ -18,6 +18,17 @@ class RkaPengeluaran extends Model
         $query->where('ta', $ta);
     }
 
+    public function scopeParent($query, $id)
+    {
+        return $query->whereHas('rekeningKegiatan', function ($qrk) use ($id) {
+            $qrk->whereHas('rekeningPengeluaran', function ($qrp) use ($id) {
+                $qrp->whereHas('parentPengeluaran', function ($q) use ($id) {
+                    $q->where('id', $id);   
+                });
+            });
+        });
+    }
+
     public function rekeningKegiatan()
     {
         return $this->belongsTo(RekeningKegiatan::class, 'kegiatan_id');
