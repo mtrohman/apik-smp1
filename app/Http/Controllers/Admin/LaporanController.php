@@ -125,7 +125,7 @@ class LaporanController extends Controller
         // return $parentPengeluaran;
         $barisTambahan = 0;
         $parentIndex = [
-            24, 26, 28, 30, 32, 34, 36, 38
+            24, 27, 30, 33, 36, 39, 42, 45
         ];
 
         foreach ($parentPengeluaran as $keyP=> $parent) {
@@ -174,12 +174,12 @@ class LaporanController extends Controller
             // return $dataArray;
             // return $indexKepala;
             $rowBefore = $barisTambahan + ($parentIndex[$keyP] );
-            $startFrom = $barisTambahan + ($parentIndex[$keyP] -1);
+            $startFrom = $barisTambahan + ($parentIndex[$keyP] -1 );
             $barisTambahan += $jumlahBaris;
 
             if ($jumlahBaris) {
                 # code...
-                $worksheet->insertNewRowBefore($rowBefore ,$jumlahBaris - 1);
+                $worksheet->insertNewRowBefore($rowBefore ,$jumlahBaris );
                 $worksheet->fromArray(
                     $dataArray,
                     NULL,
@@ -197,9 +197,9 @@ class LaporanController extends Controller
         // return $startFrom;
         // return $rowBefore;
         
-        $maxBaris = 45 + $barisTambahan;
-        $conditionalStyles = $spreadsheet->getActiveSheet()->getStyle('B23')->getConditionalStyles();
-        $spreadsheet->getActiveSheet()->getStyle("B23:K$maxBaris")->setConditionalStyles($conditionalStyles);
+        // $maxBaris = 45 + $barisTambahan;
+        // $conditionalStyles = $spreadsheet->getActiveSheet()->getStyle('B23')->getConditionalStyles();
+        // $spreadsheet->getActiveSheet()->getStyle("B23:K$maxBaris")->setConditionalStyles($conditionalStyles);
 
 
         // Cetak
