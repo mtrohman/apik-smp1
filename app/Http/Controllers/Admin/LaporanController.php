@@ -56,7 +56,7 @@ class LaporanController extends Controller
         foreach ($rkaPendapatan as $key => $item) {
             $nama_rekening = Str::of($item->rekeningPendapatan->nama_rekening)->replaceMatches('/[^A-Za-z0-9 _]/', '')->lower()->snake();
             $$nama_rekening = $item->nominal;
-            $worksheet->getCell($nama_rekening)->setValue($$nama_rekening);
+            $worksheet->getCell("$nama_rekening")->setValue($$nama_rekening);
         }
 
         // return Str::of("Sumbangan Alumni Kls IX")->replaceMatches('/[^A-Za-z0-9 _]/', '')->lower()->snake();
@@ -75,7 +75,7 @@ class LaporanController extends Controller
         foreach ($parentPengeluaran as $key => $parent) {
             $nama_rekening = Str::of($parent->nama_parent)->replaceMatches('/[^A-Za-z0-9 _]/', '')->lower()->snake();;
             $$nama_rekening = RkaPengeluaran::ta($request->cookie('ta'))->parent($parent->id)->sum('nominal');
-            $worksheet->getCell($nama_rekening)->setValue($$nama_rekening);
+            $worksheet->getCell("$nama_rekening")->setValue($$nama_rekening);
         }
         // return $standar_isi;
 
@@ -278,7 +278,7 @@ class LaporanController extends Controller
                 $realisasi_bulan = 'realisasi_'.$i;
                 $$nama_rekening += $item->$realisasi_bulan;
             }
-            $worksheet->getCell($nama_rekening)->setValue($$nama_rekening);
+            $worksheet->getCell("$nama_rekening")->setValue($$nama_rekening);
         }
         // return $saldo_bos;
 
@@ -292,7 +292,7 @@ class LaporanController extends Controller
                 // $$nama_rekening += $item->$realisasi_bulan;
                 $$nama_rekening += RkaPengeluaran::ta($request->cookie('ta'))->parent($parent->id)->sum($realisasi_bulan);
             }
-            $worksheet->getCell($nama_rekening)->setValue($$nama_rekening);
+            $worksheet->getCell("$nama_rekening")->setValue($$nama_rekening);
         }
         // return $standar_isi;
 
