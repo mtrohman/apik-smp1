@@ -67,18 +67,22 @@
 
                                 @php
                                     $ta= Cookie::get('ta');
+                                    $ta= \Str::of($ta)->explode('-');
+                                    // echo $ta[0];
+                                    $iteration = 0;
                                 @endphp
-                                @for ($i = 2; $i <= 12; $i++)
+                                @for ($i = 8; $i <= 12; $i++)
                                     @php
                                         $url="";
                                         $text = "";
-                                        $period= \Carbon\Carbon::createFromFormat("!Y-n-j", $ta."-".$i."-1");
+                                        $period= \Carbon\Carbon::createFromFormat("!Y-n-j", $ta[0]."-".$i."-1");
                                         $ada_saldo_awal= $saldo_awals->contains('periode', $period->format('Y-m-d'));
                                         $saldo_tunai_awal_bln= $saldo_awals->where('periode',$period->format('Y-m-d'))->sum('saldo_tunai'); 
+                                        $iteration++;
                                     @endphp
 
                                     <tr>
-                                        <td>{{($i-1)}}</td>
+                                        <td>{{($iteration)}}</td>
                                         <td>{{$period->locale('id_ID')->isoFormat('LL')}}</td>
                                         <td align="right">@money($saldo_tunai_awal_bln)</td>
                                         <td>
@@ -100,13 +104,18 @@
                                     </tr>
                                 @endfor
 
+                                @for ($i = 1; $i <= 7; $i++)
+                                    @php
+                                        $url="";
+                                        $text = "";
+                                        $period= \Carbon\Carbon::createFromFormat("!Y-n-j", $ta[1]."-".$i."-1");
+                                        $ada_saldo_awal= $saldo_awals->contains('periode', $period->format('Y-m-d'));
+                                        $saldo_tunai_awal_bln= $saldo_awals->where('periode',$period->format('Y-m-d'))->sum('saldo_tunai'); 
+                                        $iteration++;
+                                    @endphp
+
                                     <tr>
-                                        @php
-                                            $period= \Carbon\Carbon::createFromFormat("!Y-n-j", $ta."-".$i."-1");
-                                            $ada_saldo_awal= $saldo_awals->contains('periode', $period->format('Y-m-d'));
-                                            $saldo_tunai_awal_bln= $saldo_awals->where('periode',$period->format('Y-m-d'))->sum('saldo_tunai'); 
-                                        @endphp
-                                        <td>{{($i-1)}}</td>
+                                        <td>{{($iteration)}}</td>
                                         <td>{{$period->locale('id_ID')->isoFormat('LL')}}</td>
                                         <td align="right">@money($saldo_tunai_awal_bln)</td>
                                         <td>
@@ -124,8 +133,36 @@
                                             <a class="btn btn-sm btn-primary w-100" href="{{$url}}">
                                                 {{$text}}
                                             </a>
-                                        </td>
+                                        </td>            
                                     </tr>
+                                @endfor
+
+                                {{-- <tr>
+                                    @php
+                                        $period= \Carbon\Carbon::createFromFormat("!Y-n-j", $ta."-".$i."-1");
+                                        $ada_saldo_awal= $saldo_awals->contains('periode', $period->format('Y-m-d'));
+                                        $saldo_tunai_awal_bln= $saldo_awals->where('periode',$period->format('Y-m-d'))->sum('saldo_tunai'); 
+                                    @endphp
+                                    <td>{{($i-1)}}</td>
+                                    <td>{{$period->locale('id_ID')->isoFormat('LL')}}</td>
+                                    <td align="right">@money($saldo_tunai_awal_bln)</td>
+                                    <td>
+                                        @php
+                                            if ($ada_saldo_awal) {
+                                                $id_sa= $saldo_awals->firstWhere('periode', $period->format('Y-m-d'))->id;
+                                                $url = route('admin.saldo_awal.hitung', ['id' => $id_sa]);
+                                                $text = "Hitung Ulang";
+                                            }
+                                            else{
+                                                $url= route('admin.saldo_awal.kalkulasi', ['periode' => $period->format('Y-m-d')]);
+                                                $text = "Kalkulasi";
+                                            }
+                                        @endphp
+                                        <a class="btn btn-sm btn-primary w-100" href="{{$url}}">
+                                            {{$text}}
+                                        </a>
+                                    </td>
+                                </tr> --}}
 
                             </tbody>
                         </table>

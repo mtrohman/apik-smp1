@@ -99,6 +99,7 @@ class BelanjaController extends Controller
             // Update RKA
             try {
                 $bulan = $belanja->tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPengeluaran->$realisasi_bulan += $belanja->nominal;
                 $rkaPengeluaran->save();
@@ -201,6 +202,7 @@ class BelanjaController extends Controller
             // Step 4: Update RKA
             try {
                 $bulan = $belanja->tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPengeluaran->$realisasi_bulan += $selisih;
                 $rkaPengeluaran->save();
@@ -288,6 +290,7 @@ class BelanjaController extends Controller
             // Step 4: Update RKA
             try {
                 $bulan = $tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPengeluaran->$realisasi_bulan -= $nominal;
                 $rkaPengeluaran->save();

@@ -102,6 +102,7 @@ class PenerimaanController extends Controller
             // Update RKA
             try {
                 $bulan = $penerimaan->tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPendapatan->$realisasi_bulan += $penerimaan->nominal;
                 $rkaPendapatan->save();
@@ -204,6 +205,7 @@ class PenerimaanController extends Controller
             // Step 4: Update RKA
             try {
                 $bulan = $penerimaan->tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPendapatan->$realisasi_bulan += $selisih;
                 $rkaPendapatan->save();
@@ -299,6 +301,7 @@ class PenerimaanController extends Controller
             // Step 4: Update RKA
             try {
                 $bulan = $tanggal->format('n');
+                $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
                 $rkaPendapatan->$realisasi_bulan -= $nominal;
                 $rkaPendapatan->save();

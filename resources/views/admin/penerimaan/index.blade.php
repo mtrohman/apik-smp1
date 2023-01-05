@@ -49,6 +49,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>
+                                        TA
+                                    </th>
                                     <th width="20%">
                                         Tanggal
                                     </th>
@@ -69,6 +72,9 @@
                                 <tr>
                                     <td>
                                         {{ $loop->iteration }}
+                                    </td>
+                                    <td style="white-space: nowrap;">
+                                        {{ $penerimaan->ta ?? 'N/A' }}
                                     </td>
                                     <td>
                                         {{ $penerimaan->tanggal->locale('id')->isoFormat('LL') ?? 'N/A' }}
@@ -102,7 +108,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6" align="center">No records found!</td>
+                                    <td colspan="7" align="center">No records found!</td>
                                 </tr>
                                 @endforelse
                             </tbody>

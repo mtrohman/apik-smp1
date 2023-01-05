@@ -38,7 +38,7 @@
                         <table class="table mono table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="10%">
+                                    <th width="25%">
                                         TA
                                     </th>
                                     

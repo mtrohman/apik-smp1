@@ -121,7 +121,12 @@
                                 </div>
 
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control  @error('ta') is-invalid @enderror" id="ta" name="ta" placeholder="Enter your TA" required value="2022">
+                                    {{-- <input type="number" class="form-control  @error('ta') is-invalid @enderror" id="ta" name="ta" placeholder="Enter your TA" required value="2022"> --}}
+                                    <select class="form-select @error('ta') is-invalid @enderror" name="ta" id="ta" required>
+                                        <option value="">Pilih Th Pelajaran</option>
+                                        <option value="{{now()->year - 1}}-{{now()->year}}">{{now()->year - 1}}-{{now()->year}}</option>
+                                        <option value="{{now()->year}}-{{now()->year + 1}}">{{now()->year}}-{{now()->year + 1}}</option>
+                                    </select>
                                     <label class="form-label" for="ta">TA</label>
                                     @error('ta')
                                         <span class="invalid-feedback" role="alert">

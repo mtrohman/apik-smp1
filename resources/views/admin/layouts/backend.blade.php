@@ -409,9 +409,18 @@
 
         <!-- Right Section -->
         <div class="space-x-1">
-          <button type="button" class="btn btn-sm btn-alt-secondary" id="TA">
-              <span class="fw-semibold">TA : {{ Cookie::get('ta') }}</span>
+          <button type="button" class="btn btn-sm btn-alt-secondary" id="ta" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="fw-semibold">TA</span>
+              <span class="fw-semibold d-none d-sm-inline-block fw-semibold">: {{ Cookie::get('ta') }}</span>
           </button>
+          <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0" aria-labelledby="ta">
+              <div class="p-2">
+                <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1" href="javascript:void(0)">
+                  <span>Tahun Pelajaran {{ Cookie::get('ta') }}</span>
+                  
+                </a>
+              </div>
+          </div>
           <!-- User Dropdown -->
           <div class="dropdown d-inline-block">
             <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

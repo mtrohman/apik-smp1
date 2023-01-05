@@ -44,7 +44,7 @@
                         <table class="table mono table-bordered">
                             <thead>
                                 <tr>
-                                    <th width="5%">
+                                    <th width="10%">
                                         TA
                                     </th>
 
@@ -72,7 +72,7 @@
                             <tbody>
                                 @forelse($rekeningKegiatans as $rekeningKegiatan)
                                 <tr>
-                                    <td>
+                                    <td style="white-space: nowrap;">
                                         {{ $rekeningKegiatan->ta ?? 'N/A' }}
                                     </td>
 
@@ -112,7 +112,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" align="center">No records found!</td>
+                                    <td colspan="6" align="center">No records found!</td>
                                 </tr>
                                 @endforelse
                             </tbody>
