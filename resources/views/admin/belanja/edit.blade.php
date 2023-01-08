@@ -102,6 +102,23 @@
                         <div class="row">
                             <div class="mb-4">
                                 <div class="form-floating">
+                                    <input type="hidden" name="sumber_dana" value="{{$belanja->sumber_dana}}">
+                                    <select class="form-select mono @error('sumber_dana') is-invalid @enderror" id="sumber_dana" name="sumber_dana" style="width: 100%;" required disabled>
+                                        <option value>Pilih Sumber Dana</option>
+                                        <option selected value="{{ $belanja->sumber_dana }}">{{ $belanja->sumber_dana }}</option>                                     
+                                    </select>
+                                    <label class="form-label" for="sumber_dana">Sumber Dana</label>
+                                    @error('sumber_dana')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-4">
+                                <div class="form-floating">
                                     <input type="text" class="form-control mono rupiah @error('nominal') is-invalid @enderror" id="nominal" name="nominal" placeholder="Masukkan Nominal" value="{{ $belanja->nominal }}" required>
                                     <label class="form-label" for="nominal">Nominal</label>
                                     @error('nominal')

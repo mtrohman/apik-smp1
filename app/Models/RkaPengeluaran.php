@@ -10,7 +10,8 @@ class RkaPengeluaran extends Model
 
     protected $casts = [
         'sumber_dana' => 'array',
-        'alokasi' => 'array'
+        'alokasi' => 'array',
+        'realisasi_sumber_dana' => 'array',
     ];
 
     public function scopeTa($query, $ta)

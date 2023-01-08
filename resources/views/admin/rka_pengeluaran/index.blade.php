@@ -142,10 +142,38 @@
                                         @money($rkaPengeluaran->nominal ?? 0)
                                     </td>
                                     @for ($i = 1; $i <= 12; $i++)
-                                        <td class="text-end">
+                                        <td>
+                                            <table class="table table-sm">
+                                                <tr>
+                                                    <td colspan="2" class="text-end">
+                                                        @php $realisasi ='realisasi_'.$i; @endphp
+                                                        @money($rkaPengeluaran->$realisasi ?? 0)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>APBD</td>
+                                                    <td class="text-end">
+                                                        @money($rkaPengeluaran->realisasi_sumber_dana['apbd'][$realisasi] ?? 0)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BOS</td>
+                                                    <td class="text-end">
+                                                        @money($rkaPengeluaran->realisasi_sumber_dana['bos'][$realisasi] ?? 0)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SPM</td>
+                                                    <td class="text-end">
+                                                        @money($rkaPengeluaran->realisasi_sumber_dana['spm'][$realisasi] ?? 0)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        {{-- <td class="text-end">
                                             @php $realisasi ='realisasi_'.$i; @endphp
                                             @money($rkaPengeluaran->$realisasi ?? 0)
-                                        </td>
+                                        </td> --}}
                                     @endfor
 
                                 </tr>

@@ -36,7 +36,21 @@ class RkaPendapatanController extends Controller
     {
         // return $request;
         try{
-            $rkaPendapatan = RkaPendapatan::create($request->all());
+            // $rkaPendapatan = RkaPendapatan::create($request->all());
+            $rkaPendapatan = new RkaPendapatan();
+            $rkaPendapatan->ta = $request->ta;
+            $rkaPendapatan->rekening_id = $request->rekening_id;
+            $rkaPendapatan->nominal = $request->nominal;
+
+            $alokasi = [
+                'triwulan_1' => $request->triwulan_1,
+                'triwulan_2' => $request->triwulan_2,
+                'triwulan_3' => $request->triwulan_3,
+                'triwulan_4' => $request->triwulan_4
+            ];
+
+            $rkaPendapatan->alokasi = $alokasi;
+            $rkaPendapatan->save();
 
             $notification = array(
                 'message' => 'Rka Pendapatan saved successfully!',

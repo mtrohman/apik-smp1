@@ -20,9 +20,9 @@ class BelanjaController extends Controller
         parent::__construct('belanja');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['belanjas'] = Belanja::latest()->paginate(10);
+        $data['belanjas'] = Belanja::ta($request->cookie('ta'))->paginate(10);
         return view('admin.belanja.index', $data);
     }
 
@@ -34,8 +34,14 @@ class BelanjaController extends Controller
 
     public function store(BelanjaRequest $request)
     {
+        /*$json = '{"apbd":{}}';
+        $json = json_decode($json, true);
+        $json['apbd']['realisasi_1'] = $json['apbd']['realisasi_1'] ?? 0;
+        return $request;*/
+
         try{
             $ta = $request->ta;
+            $sumber_dana = strtolower($request->sumber_dana);
             $rkaPengeluaran = RkaPengeluaran::findOrFail($request->rka_pengeluaran_id);
             // return $rkaPengeluaran;
             
@@ -101,7 +107,12 @@ class BelanjaController extends Controller
                 $bulan = $belanja->tanggal->format('n');
                 $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
+                $realisasi_sumber_dana = $rkaPengeluaran->realisasi_sumber_dana;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] = $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] ?? 0;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] += $belanja->nominal;
+
                 $rkaPengeluaran->$realisasi_bulan += $belanja->nominal;
+                $rkaPengeluaran->realisasi_sumber_dana = $realisasi_sumber_dana;
                 $rkaPengeluaran->save();
 
             } catch (\Exception $e) {
@@ -147,6 +158,7 @@ class BelanjaController extends Controller
     {
         try {
             $ta = $request->ta;
+            $sumber_dana = strtolower($belanja->sumber_dana);
             $rkaPengeluaran = RkaPengeluaran::findOrFail($request->rka_pengeluaran_id);
             $nominal_lama = $belanja->nominal;
             $nominal_baru = $request->nominal;
@@ -204,7 +216,12 @@ class BelanjaController extends Controller
                 $bulan = $belanja->tanggal->format('n');
                 $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
+                $realisasi_sumber_dana = $rkaPengeluaran->realisasi_sumber_dana;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] = $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] ?? 0;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] += $selisih;
+
                 $rkaPengeluaran->$realisasi_bulan += $selisih;
+                $rkaPengeluaran->realisasi_sumber_dana = $realisasi_sumber_dana;
                 $rkaPengeluaran->save();
 
             } catch (Exception $e) {
@@ -237,6 +254,7 @@ class BelanjaController extends Controller
     {
         try{
             $ta =$request->cookie('ta');
+            $sumber_dana = strtolower($belanja->sumber_dana);
             $nominal = $belanja->nominal;
             $tanggal = $belanja->tanggal;
             $periode = $belanja->tanggal->addMonth()->startOfMonth();
@@ -292,7 +310,12 @@ class BelanjaController extends Controller
                 $bulan = $tanggal->format('n');
                 $bulan = ($bulan > 6) ? $bulan -= 6 : $bulan += 6;
                 $realisasi_bulan = 'realisasi_'.$bulan;
+                $realisasi_sumber_dana = $rkaPengeluaran->realisasi_sumber_dana;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] = $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] ?? 0;
+                $realisasi_sumber_dana[$sumber_dana][$realisasi_bulan] -= $nominal;
+
                 $rkaPengeluaran->$realisasi_bulan -= $nominal;
+                $rkaPengeluaran->realisasi_sumber_dana = $realisasi_sumber_dana;
                 $rkaPengeluaran->save();
 
             } catch (Exception $e) {

@@ -46,11 +46,14 @@
                                 <tr>
                                     <th>#</th>
                                     <th>TA</th>
-                                    <th width="20%">
+                                    <th>
                                         Tanggal
                                     </th>
                                     <th>
                                         RKA Pengeluaran
+                                    </th>
+                                    <th>
+                                        Sumber Dana
                                     </th>
                                     <th>
                                         Nominal
@@ -70,11 +73,14 @@
                                     <td style="white-space: nowrap;">
                                         {{ $belanja->ta ?? 'N/A' }}
                                     </td>
-                                    <td>
+                                    <td style="white-space: nowrap;">
                                         {{ $belanja->tanggal->locale('id')->isoFormat('LL') ?? 'N/A' }}
                                     </td>
                                     <td>
                                         {{ $belanja->rkaPengeluaran->rekeningKegiatan->kode_kegiatan ?? 'N/A' }} - {{ $belanja->rkaPengeluaran->rekeningKegiatan->nama_kegiatan ?? 'N/A' }}
+                                    </td>
+                                    <td>
+                                        {{ $belanja->sumber_dana ?? "-"}}
                                     </td>
                                     <td class="text-end" style="white-space: nowrap">
                                         @money($belanja->nominal ?? 0)
@@ -100,7 +106,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="7" align="center">No records found!</td>
+                                    <td colspan="8" align="center">No records found!</td>
                                 </tr>
                                 @endforelse
                             </tbody>

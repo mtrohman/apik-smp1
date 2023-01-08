@@ -17,13 +17,28 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <div class="block block-themed">
                 <div class="block-header">
                     <h3 class="block-title">
                         {{ $title }}
                     </h3>
                     
+                    @if (Request::has('sampaitanggal'))
+                        <div class="block-options">
+                            <a href="/admin/laporan/realisasi-bab3" class="btn btn-sm btn-alt-primary">
+                                <i class="fa fa-fw fa-arrow-right opacity-50"></i>
+                                <span class="d-none d-sm-inline-block">triwulan</span>
+                            </a>
+                        </div>
+                    @else
+                        <div class="block-options">
+                            <a href="/admin/laporan/realisasi-bab3?sampaitanggal" class="btn btn-sm btn-alt-primary">
+                                <i class="fa fa-fw fa-arrow-right opacity-50"></i>
+                                <span class="d-none d-sm-inline-block">sampai dengan</span>
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="block-content">
@@ -33,7 +48,7 @@
                     </div>
                     @endif
 
-                    <form id="laporan" method="POST" action='{{ route("admin.proses.realisasi_bab3") }}' enctype="multipart/form-data">
+                    <form id="laporan" method="POST" action='{{ (Request::missing('sampaitanggal')) ? route("admin.proses.realisasi_bab3") : route("admin.proses.realisasi_bab3", ['sampaitanggal']) }}' enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="mb-4">
@@ -47,39 +62,64 @@
 
                             </div>
                         </div>
+                        @if (Request::missing('sampaitanggal'))
+                            <div class="row">
+                                <div class="mb-4">
+                                    <div class="form-floating">
+                                        <select class="form-select mono @error('triwulan') is-invalid @enderror" id="triwulan" name="triwulan" required>
+                                            <option value>Pilih Triwulan</option>
+                                            @for ($i = 1; $i <= 4; $i++)
+                                                <option value="{{$i}}">Triwulan {{$i}}</option>
+                                            @endfor
+                                        </select>
+                                        <label class="form-label" for="triwulan">Triwulan</label>
+                                        @error('triwulan')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
-                        <div class="row">
-                            <div class="mb-4">
-                                <div class="form-floating">
-                                    <select class="form-select mono @error('triwulan') is-invalid @enderror" id="triwulan" name="triwulan" required>
-                                        <option value>Pilih Triwulan</option>
-                                        @for ($i = 1; $i <= 4; $i++)
-                                            <option value="{{$i}}">Triwulan {{$i}}</option>
-                                        @endfor
-                                    </select>
-                                    <label class="form-label" for="triwulan">Triwulan</label>
-                                    @error('triwulan')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
                                 </div>
-
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="mb-4">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control mono @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" required>
-                                    <label class="form-label" for="ta">Tanggal</label>
-                                    @error('tanggal')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <div class="row">
+                                <div class="mb-4">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control mono @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" required>
+                                        <label class="form-label" for="tanggal">Tanggal</label>
+                                        @error('tanggal')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
+                        @else
+                            <div class="row">
+                                <div class="mb-4">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control mono @error('until') is-invalid @enderror" id="until" name="until" placeholder="Masukkan Tanggal" required>
+                                        <label class="form-label" for="until">Sampai Dengan</label>
+                                        @error('until')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
-                        
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-4">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control mono @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal" required>
+                                        <label class="form-label" for="tanggal">Tanggal Surat</label>
+                                        @error('tanggal')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
 
                     </form>
                 </div>

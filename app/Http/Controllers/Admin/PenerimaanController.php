@@ -20,9 +20,9 @@ class PenerimaanController extends Controller
         parent::__construct('penerimaan');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data['penerimaans'] = Penerimaan::paginate(10);
+        $data['penerimaans'] = Penerimaan::ta($request->cookie('ta'))->paginate(10);
         return view('admin.penerimaan.index', $data);
     }
 

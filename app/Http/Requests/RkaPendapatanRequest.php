@@ -14,7 +14,7 @@ class RkaPendapatanRequest extends FormRequest
     public function rules()
     {
         return [
-            'ta' => 'required|min:4|max:4',
+            'ta' => 'required|min:9|max:9',
             'rekening_id' => 'required',
             'nominal' => 'required',
         ];

@@ -10,6 +10,11 @@ class Belanja extends Model
 
     protected $dates = ['tanggal'];
 
+    public function scopeTa($query, $ta)
+    {
+        $query->where('ta', $ta);
+    }
+
     public function rkaPengeluaran()
     {
         return $this->belongsTo(RkaPengeluaran::class);

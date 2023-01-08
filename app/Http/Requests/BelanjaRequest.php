@@ -17,6 +17,7 @@ class BelanjaRequest extends FormRequest
             'nominal' => 'required|numeric|gt:0',
             'rka_pengeluaran_id' => 'required',
             'tanggal' => 'required',
+            'sumber_dana' => 'required',
         ];
     }
 }

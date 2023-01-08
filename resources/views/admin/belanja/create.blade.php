@@ -141,6 +141,24 @@
                         <div class="row">
                             <div class="mb-4">
                                 <div class="form-floating">
+                                    <select class="form-select mono @error('sumber_dana') is-invalid @enderror" id="sumber_dana" name="sumber_dana" style="width: 100%;" required>
+                                        <option value>Pilih Sumber Dana</option>
+                                        <option value="APBD">APBD</option>
+                                        <option value="BOS">BOS</option>
+                                        <option value="SPM">SPM</option>                                       
+                                    </select>
+                                    <label class="form-label" for="sumber_dana">Sumber Dana</label>
+                                    @error('sumber_dana')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="mb-4">
+                                <div class="form-floating">
                                     <input type="text" class="form-control mono rupiah @error('nominal') is-invalid @enderror" id="nominal" name="nominal" placeholder="Masukkan Nominal" value="0" required>
                                     <label class="form-label" for="nominal">Nominal</label>
                                     @error('nominal')

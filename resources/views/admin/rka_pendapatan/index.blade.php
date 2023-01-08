@@ -51,6 +51,9 @@
                                         Rekening
                                     </th>
                                     <th rowspan="2">
+                                        Alokasi
+                                    </th>
+                                    <th rowspan="2">
                                         Nominal
                                     </th>
                                     <th colspan="12">Realisasi</th>
@@ -90,8 +93,29 @@
                                     <td>
                                         {{ $rkaPendapatan->ta ?? 'N/A' }}
                                     </td>
-                                    <td>
+                                    <td style="white-space: normal">
                                         {{ $rkaPendapatan->rekeningPendapatan->kode_rekening ?? 'N/A' }} - {{ $rkaPendapatan->rekeningPendapatan->nama_rekening ?? 'N/A' }}
+                                    </td>
+                                    <td>
+                                        <table class="table table-sm">
+                                            <tr>
+                                                <td>Triwulan 1</td>
+                                                <td class="text-end">@money($rkaPendapatan->alokasi['triwulan_1'] ?? 0)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Triwulan 2</td>
+                                                <td class="text-end">@money($rkaPendapatan->alokasi['triwulan_2'] ?? 0)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Triwulan 3</td>
+                                                <td class="text-end">@money($rkaPendapatan->alokasi['triwulan_3'] ?? 0)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Triwulan 4</td>
+                                                <td class="text-end">@money($rkaPendapatan->alokasi['triwulan_4'] ?? 0)</td>
+                                            </tr>
+                                            
+                                        </table>
                                     </td>
                                     <td class="text-end">
                                         @money($rkaPendapatan->nominal ?? 0)
